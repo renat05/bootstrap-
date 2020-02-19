@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+<!--
+<video autoplay muted loop id="myVideo">
+  <source src="img/video.mp4" type="video/mp4">
+</video>
+-->
+
+
+  
+
+
+<div class="container">
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img class="img" style="margin-top: -4px" width="25px" src="img/77.png" alt=""></a>
+    </div>
+    <ul style="margin-left: 300px" class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Blog </a></li>
+      <li><a href="#">About </a></li>
+      <li><a href="#">Contact </a></li>
+      <li><a href="#">FAQ </a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+    <input class="input" type="text" id="name" placeholder="name"><br>    
+    <input class="input" type="text" id="surname" placeholder="surname"><br>
+    <input class="input" type="text" id="mobile" placeholder="mobile"><br>
+    <button style= "margin-top: 20px;width: 70px;height: 40px; font-size: 18px;" class="btn-primary btn-danger" onclick="Gonder()">Save</button> <br>
+ 
+
+
+
+<article class="principle sevenb">
+    <div class="shape a"></div>
+    <div class="shape b"></div>
+  </article>
+
+
+       
+    <table  class="table table-hover" style="margin-top: 20px;" border="1" style="width: 500px;">
+
+            
+        <thead  class="table">
+            <tr>
+                <th class="tal">&#x2116;
+</th>
+                <th class="tal">Name</th>
+                <th class="tal">Surname</th>
+                <th class="tal">Mobile</th>
+                <th class="tal">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+
+    </table>
+ <div class="pagination">
+        <div class="page-item">1</div>
+        <div class="page-item">2</div>
+        <div class="page-item">3</div>
+    </div>
+
+
+
+
+    <script>
+        class Person {
+            constructor(name, surname, mobile) {
+                this.name = name;
+                this.surname = surname;
+                this.mobile = mobile;
+            }
+            getName() {
+                return this.name;
+            }
+            getSurname() {
+                return this.surname;
+            }
+            getMobile() {
+                return this.mobile;
+            }
+            getFullData() {
+                return this.name + " " + this.surname + " " + this.mobile;
+            }
+        }
+        var people = [];
+        var lastPage = 1;
+
+        function Gonder() {
+            var adiniz = $("#name").val();
+            var soyadiniz = $("#surname").val();
+            var nomreniz = $("#mobile").val();
+            people.push(new Person(adiniz, soyadiniz, nomreniz));
+            lastPage = Math.ceil(people.length / 10);
+            document.getElementById("name").value = "";
+            document.getElementById("surname").value = "";
+            document.getElementById("mobile").value = "";
+            loadTable(lastPage);
+        }
+
+
+         function delall() {
+        var table = document.querySelector('Gonder');
+
+        for (var i=table.rows.length-1;i>0;i--){
+            table.deleteRow(i);
+        }
+    }
+
+        function loadTable(page) {
+            lastPage = page;
+            var table = $('table').find('tbody');
+            table.html('');
+            let massLength = people.length;
+            for (var i = (page - 1) * 10; i < page * 10 && i < massLength; ++i) {
+                if (!people[i]) continue;
+                table.append(`<tr>
+                        <td>${i + 1}</td>
+                        <td>${people[i].getName()}</td>
+                        <td>${people[i].getSurname()}</td>
+                        <td>${people[i].getMobile()}</td>
+                        <td><button onclick="sil(${i})">Delete</button>
+                        <button onclick="edit(${i})">Edit</button></td>
+                        
+                    </tr>`);
+
+
+
+
+            }
+            createPagination(page);
+
+        }
+
+
+
+      
+
+
+        function sil(i) {
+            delete people[i];
+            loadTable(lastPage);
+        }
+        var edittr;
+
+        function edit(i) {
+            document.getElementById("name").value = people[i].getName();
+            document.getElementById("surname").value = people[i].getSurname();
+            document.getElementById("mobile").value = people[i].getMobile();
+        }
+
+        function createPagination(activePage) {
+            let massLength = people.length;
+            let rowCount = 10;
+            let pageCount = Math.ceil(massLength / rowCount);
+            var paginationDiv = $('.pagination');
+            paginationDiv.html('');
+            paginationDiv.append(`<div onclick="loadTable(1)" class="page-item"><<<</div>`);
+
+            if (activePage - 1 >= 1) {
+                paginationDiv.append(`<div onclick="loadTable(${activePage-1})" class="page-item"><</div>`);
+            } else {
+                paginationDiv.append(`<div class="page-item"><</div>`);
+            }
+            for (var page = 1; page <= pageCount; ++page) {
+                if (page == activePage) {
+                    paginationDiv.append(`<div class="page-item activePage">${page} </div>`);
+                } else {
+                    paginationDiv.append(`<div onclick="loadTable(${page})" class="page-item">${page} </div>`);
+                }
+                var son = page;
+            }
+            if (activePage + 1 <= son) {
+                paginationDiv.append(`<div onclick="loadTable(${activePage+1})" class="page-item">></div>`);
+            } else {
+                paginationDiv.append(`<div class="page-item">></div>`);
+
+            }
+            paginationDiv.append(`<div onclick="loadTable(${son})" class="page-item">>>></div>`);
+
+
+        }
+        loadTable(lastPage);
+    </script>
+
+<script src="js/bootstrap.js"></script>
+</body>
+
+</html>

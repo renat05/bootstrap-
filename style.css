@@ -1,0 +1,88 @@
+.pagination {
+            display:flex;
+            margin-top: 70px;
+
+            
+        }
+        #surname{
+            margin-top: 15px;
+        }
+        #mobile{
+            margin-top: 15px;
+        }
+
+        .tal{
+            text-align: center;
+        }
+
+        input{
+            width: 220px;
+            height: 40px;
+            box-shadow: 2px 0px 10px gray;
+              height: 40px;
+
+      padding-left: 7px;
+        }
+
+
+.input::-webkit-input-placeholder {
+  position: relative;
+  left: 70px;
+  display: block;
+  transition: all .4s ease-in-out;
+}
+.input:hover::-webkit-input-placeholder { 
+  left: 0; 
+}
+
+
+
+        .pagination>.page-item {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            background: white;
+            border-radius: 20%;
+            box-shadow: 2px 0px 10px gray;
+            margin: 5px;
+            cursor: pointer;
+            transition: .4s ease all;
+        }
+
+        .pagination>.page-item:hover {
+            background: green;
+            color: yellow;
+        }
+
+        .activePage {
+            background: black !important;
+            color: white;
+        }
+
+        table {
+            text-align: center;
+        }
+
+
+        body{
+            background-image: url(img/st.jpg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+nav{
+    margin-top: 10px;
+}
+
+            #myVideo {
+
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+
